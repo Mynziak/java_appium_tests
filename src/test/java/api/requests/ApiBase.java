@@ -17,7 +17,7 @@ public class ApiBase {
 
     protected String scheme = "https";
     protected String device = "web";
-    protected String appKey = "AutoTest343_13FmciS";
+    protected String appKey = "";
     protected String host;
 
     protected ApiBase(String hostUrl) {
