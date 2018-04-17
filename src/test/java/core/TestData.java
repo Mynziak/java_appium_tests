@@ -7,5 +7,4 @@ public class TestData {
     public String url;
     public List<String> emails = new ArrayList();
     public String password;
-
 }

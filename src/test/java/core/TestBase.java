@@ -7,9 +7,11 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import utils.Logger;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -34,7 +36,7 @@ public class TestBase {
     protected void beforeTest(@Optional(MobilePlatform.ANDROID) String platform,
                               @Optional(DEFAULT_URL) String url,
                               @Optional(DEFAULT_EMAIL) String email,
-                              @Optional(DEFAULT_EMAIL) String password) throws MalformedURLException {
+                              @Optional(DEFAULT_PASSWORD) String password) throws MalformedURLException {
 
         //set directory od application:
         File classPathRoot = new File(System.getProperty("user.dir"));
@@ -52,7 +54,7 @@ public class TestBase {
         caps.setCapability(MobileCapabilityType.UDID, androidDeviceUdid); //it's id of android device - found in
         caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "6.0");
         caps.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-        caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 300);  // After this time app will close
+        caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 600);  // After this time app will close 300 ~ 5 min
         caps.setCapability("appPackage", appPackageName);
         caps.setCapability("appActivity", firstAppActivityName);
         driver = getDriver(platform, caps);
@@ -75,5 +77,12 @@ public class TestBase {
         }
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return getDriver();
+    }
+
+    @AfterTest
+    protected void afterTest() {
+        Logger.info("AfterTest: tearDown");
+        driver.closeApp();
+        driver.quit();
     }
 }

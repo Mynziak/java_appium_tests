@@ -9,8 +9,15 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginPage extends BasePage {
 
+    private By email_field = By.id("com.pdffiller:id/et_login");
+
     public LoginPage(AppiumDriver<MobileElement> driver) {
         super(driver);
+    }
+
+    @Override
+    public void isOpened() {
+        assertTrue(isElementPresent(email_field, 10), "Login Page is not opened!");
     }
 
     public MydocsPage login(String email, String password) {
@@ -47,6 +54,8 @@ public class LoginPage extends BasePage {
         By register_button = By.id("com.pdffiller:id/sign_in_register");
         assertTrue(isElementPresent(register_button), "Login button is absent!");
         click(register_button);
-        return new MydocsPage(driver);
+        MydocsPage mydocsPage = new MydocsPage(driver);
+        mydocsPage.isOpened();
+        return mydocsPage;
     }
 }

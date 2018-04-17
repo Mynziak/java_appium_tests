@@ -5,11 +5,10 @@ import io.appium.java_client.MobileElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 import utils.Logger;
-import utils.TimeMan;
 
 import java.util.concurrent.TimeUnit;
 
-public class BasePage {
+public abstract class BasePage {
 
     protected boolean android = false;
     protected boolean ios = false;
@@ -19,6 +18,8 @@ public class BasePage {
     public BasePage(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
     }
+
+    public abstract void isOpened();
 
     //TODO: Use this method in Page classes where need to split platform (android or ios)
     public void setPlatformName() {
@@ -66,15 +67,12 @@ public class BasePage {
     protected void type(final By locator, final String text) {
         if (isElementPresent(locator))
             try {
-                Wait wait = new WebDriverWait(driver, 15);
+                Wait wait = new WebDriverWait(driver, 5);
                 wait.until((ExpectedCondition<Boolean>) d -> {
                     try {
                         Logger.info("Typing '" + text + "' in '" + locator + "'");
-                        TimeMan.sleep(1);
-                        driver.findElement(locator).clear();
-                        TimeMan.sleep(1);
+                        //driver.findElement(locator).clear(); //TODO: improve method, becuase it's trying to clear hint text (placeholders)
                         driver.findElement(locator).sendKeys(text);
-                        TimeMan.sleep(1);
                         return true;
                     } catch (InvalidElementStateException e) {
                         return false;
