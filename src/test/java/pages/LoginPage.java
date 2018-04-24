@@ -17,7 +17,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public void isOpened() {
-        assertTrue(isElementPresent(email_field, 10), "Login Page is not opened!");
+        assertTrue(isElementPresent(email_field, 60), "Login Page is not opened!");
     }
 
     public MydocsPage login(String email, String password) {
@@ -31,10 +31,6 @@ public class LoginPage extends BasePage {
         By login_button = By.id("com.pdffiller:id/sign_in_register");
         assertTrue(isElementPresent(login_button), "Login button is absent!");
         click(login_button);
-
-//        driver.findElement(By.id("com.pdffiller:id/et_login")).sendKeys(email);
-//        driver.findElement(By.id("com.pdffiller:id/et_password")).sendKeys(password);
-//        driver.findElement(By.id("com.pdffiller:id/sign_in_register")).click();
         return new MydocsPage(driver);
     }
 
@@ -44,7 +40,7 @@ public class LoginPage extends BasePage {
         click(register_switcher);
 
         By email_field = By.id("com.pdffiller:id/et_login");
-        assertTrue(isElementPresent(email_field, 5), "Email field is absent!");
+        assertTrue(isElementPresent(email_field, 15), "Email field is absent!");
         type(email_field, email);
 
         By password_field = By.id("com.pdffiller:id/et_password");

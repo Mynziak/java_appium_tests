@@ -14,16 +14,16 @@ public class RegistrationTest extends PDFfillerTest {
 
     private String email;
     private AppiumDriver<MobileElement> driver;
-    private String formName = "Get a Document Signed";
+        private String formName = "Get a Document Signed";
 
-    @BeforeTest
-    public void setup() {
-        this.email = StringMan.makeUniqueEmail(testData.emails.get(0));
-        this.driver = getDriver();
-    }
+        @BeforeTest
+        public void setup() {
+            this.email = StringMan.makeUniqueEmail(testData.emails.get(0));
+            this.driver = getDriver();
+        }
 
-    @Test
-    public void openEditorTest() {
+        @Test
+        public void openEditorTest() {
 
         //1. Register User:
         LoginPage loginPage = new LoginPage(driver);

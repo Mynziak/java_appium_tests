@@ -64,4 +64,13 @@ public class MydocsPage extends BasePage {
         assertTrue(isElementPresent(backArrow_button), "Back arrow button is absent!");
         click(backArrow_button);
     }
+
+    public UploaderPage openUploader() {
+        By plus_button = By.id("com.pdffiller:id/fab");
+        assertTrue(isElementPresent(plus_button), "Add document \"plus\" button is absent!");
+        click(plus_button);
+        UploaderPage uploader = new UploaderPage(driver);
+        uploader.isOpened();
+        return uploader;
+    }
 }

@@ -12,9 +12,12 @@ public class Actions extends MydocsPage{
         super(driver);
     }
 
-    public void open() {
+    public EditorPage open() {
         By open_button = By.id("com.pdffiller:id/form_action_fragment_button_fill");
         assertTrue(isElementPresent(open_button));
         click(open_button);
+        EditorPage editor = new EditorPage(driver);
+        editor.isOpened();
+        return editor;
     }
 }

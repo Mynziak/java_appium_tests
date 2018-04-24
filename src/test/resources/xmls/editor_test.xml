@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Android uploader Tests" verbose="1">
+
+    <test name="Uploader Test">
+        <parameter name="email" value="pdf_autotester+android+8test_noEmail8@support.pdffiller.com"/>
+        <classes>
+            <class name="tests.UploaderTest"/>
+        </classes>
+    </test>
+
+</suite>
